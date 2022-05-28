@@ -66,7 +66,7 @@ function BottomTabNavigator() {
         name="TabOne"
         component={TabOneScreen}
         options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Tab One',
+          title: 'Generate',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
           headerRight: () => (
             <Pressable
@@ -88,8 +88,16 @@ function BottomTabNavigator() {
         name="TabTwo"
         component={TabTwoScreen}
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Preview',
+          tabBarIcon: ({ color }) => <TabBarIcon name="image" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="TabThree"
+        component={TabTwoScreen}
+        options={{
+          title: 'Mint',
+          tabBarIcon: ({ color }) => <TabBarIcon name="upload" color={color} />,
         }}
       />
     </BottomTab.Navigator>

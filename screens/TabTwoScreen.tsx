@@ -1,9 +1,19 @@
 import { StyleSheet } from 'react-native';
+import { useState } from 'react';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
+// import { Canvas, Image } from 'canvas;'
 
 export default function TabTwoScreen() {
+  const [generatedImages, setGeneratedImages] = useState([]);
+
+  const mergeImages = async (imageArray) => {
+    // Image: Image,
+    // Canvas: Canvas,
+    // crossOrigin: "anonymous"
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Tab Two</Text>
