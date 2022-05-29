@@ -1,4 +1,5 @@
 {
+  "homepage": "http://jun784.github.io/nft-dao",
   "name": "nft-gen-front",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
