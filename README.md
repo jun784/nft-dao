@@ -7,3 +7,6 @@ https://zenn.dev/gunners6518/articles/4c06488cfa402e
 
 プロジェクトと画像を保存させる
 https://docs.expo.dev/versions/latest/sdk/async-storage/
+
+コンポーネントの更新によるuseEffectの停止
+https://reffect.co.jp/react/react-useeffect-understanding#React_useEffect

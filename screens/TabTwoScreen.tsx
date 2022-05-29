@@ -5,6 +5,8 @@ import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 // import { Canvas, Image } from 'canvas;'
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 export default function TabTwoScreen() {
   const [generatedImages, setGeneratedImages] = useState([]);
 
@@ -12,6 +14,24 @@ export default function TabTwoScreen() {
     // Image: Image,
     // Canvas: Canvas,
     // crossOrigin: "anonymous"
+  }
+
+  const storeData = async (key: string, value: string) => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem(key, jsonValue);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  const getData = async (key: string) => {
+    try {
+      const jsonValue = await AsyncStorage.getItem(key);
+      return jsonValue !== null ? JSON.parse(jsonValue) : null;
+    } catch(e) {
+
+    }
   }
 
   return (

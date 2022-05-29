@@ -12,15 +12,80 @@ import AddImages from './AddImages';
 import mergeImages from 'merge-images';
 import ImagesCombineLibrary from 'react-native-images-combine';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 export default function AddLayerArea({ path }: { path: string }) {
-  let hoges = [];
-  const [imageUris, setImageUris] = useState([]);
-  const [images, setImages] = useState([]);
-  const [generatedImages, setGeneratedImages] = useState([]);
 
-  const pickImage = async () => {
+  const storeData = async (key: string, value) => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem(key, jsonValue);
 
-     console.log(images.length);
+      console.log('store');
+      console.log(value);
+      console.log(jsonValue);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  const getData = async (key: string) => {
+    try {
+      const jsonValue = await AsyncStorage.getItem(key);
+      
+      console.log('get');
+      console.log(jsonValue);
+      return jsonValue !== null ? JSON.parse(jsonValue) : null;
+    } catch(e) {
+      console.log(e);
+    }
+  }
+
+  const [layers, setLayers] = useState([]);
+  let layersData: Array<string> = [];
+
+  const addLayer = async () => {
+    // layerの連番
+    let index = layers == null ? 0 : layers.length;
+    // layerを作成
+    let layer = {index: index, images: []};
+    console.log(layer, 'addLayer');
+
+    // layerをstateに追加する
+    setLayers([...layers, layer]);
+
+    // layerを取得
+    getData('layersData').then(data => {
+      console.log(data, 'addLayer');
+      setLayers(data);
+
+      data.push(layer);
+      storeData('layersData', data);
+    });
+
+    console.log('layersData');
+    console.log(layersData);
+  }
+
+  // コンポーネントの更新によるuseEffectの停止, []
+  useEffect(() => {
+    // layerを取得
+    getData('layersData').then(data => {
+      console.log(data, 'useEffect');
+      setLayers(data);
+    });
+  }, []);
+
+  const removeLayer = async () => {
+    console.log('ffa');
+
+  }
+
+  const removeImage = async (index: number) => {
+
+  }
+
+  const pickImage = async (layerIndex) => {
 
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaType: ImagePicker.MediaTypeOptions.All,
@@ -57,45 +122,15 @@ export default function AddLayerArea({ path }: { path: string }) {
     <View>
       <View style={styles.getStartedContainer}>
         <Text
+          onPress={addLayer}
           lightColor="rgba(0,0,0,0.8)"
           darkColor="rgba(255,255,255,0.8)">
           Add Layer
         </Text>
-
-        <Text
-          lightColor="rgba(0,0,0,0.8)"
-          darkColor="rgba(255,255,255,0.8)">
-          Layer number
-        </Text>
-
-        <TextInput
-          style={styles.layerNumber}
-          keyboardType="numeric"
-          ></TextInput>
-
-
-        <Text
-          lightColor="rgba(0,0,0,0.8)"
-          darkColor="rgba(255,255,255,0.8)">
-            Max file size: 5mb, accepted: jpg|png|png
-        </Text>
-
-        <Button onPress={pickImage} title="choose images"></Button>
-
-        {images}
-
-        {/* <AddImages onDrop={this.onDrop} /> */}
-
-
-        <Text
-          lightColor="rgba(0,0,0,0.8)"
-          darkColor="rgba(255,255,255,0.8)">
-            Max file size: 5mb, accepted: jpg|png|png
-        </Text>
-
-        {generatedImages}
-
       </View>
+
+      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+      
     </View>
   );
 }
@@ -117,6 +152,10 @@ const styles = StyleSheet.create({
     paddingVertical: 25,
   },
   layerNumber: {
+    backgroundColor: '#FFF',
+    borderRadius: 5,
+  },
+  addLayer: {
     backgroundColor: '#FFF',
     borderRadius: 5,
   }
