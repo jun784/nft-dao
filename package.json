@@ -8,7 +8,9 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "deploy": "gh-pages -d web-build",
+    "predeploy": "expo build:web"
   },
   "jest": {
     "preset": "jest-expo"
