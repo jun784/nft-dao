@@ -54,15 +54,15 @@ export default function Layer({ layerData }: { layerData: Array<string> }) {
 
   return (
     <View style={styles.getStartedContainer} key={'layer_' + layer.index} >
-        <Text
-            lightColor="rgba(0,0,0,0.8)"
-            darkColor="rgba(255,255,255,0.8)">
-            Max file size: 5mb, accepted: jpg|png|png
-        </Text>
+      <Text
+          lightColor="rgba(0,0,0,0.8)"
+          darkColor="rgba(255,255,255,0.8)">
+          Max file size: 5mb, accepted: jpg|png|png
+      </Text>
 
-    <Button onPress={pickImage} title="choose images"></Button>
+      <Button onPress={pickImage} title="choose images"></Button>
 
-    {images}
+      {images}
 
     </View>
   );

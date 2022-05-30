@@ -16,6 +16,7 @@ import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
+import TabThreeScreen from '../screens/TabThreeScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
@@ -94,7 +95,7 @@ function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="TabThree"
-        component={TabTwoScreen}
+        component={TabThreeScreen}
         options={{
           title: 'Mint',
           tabBarIcon: ({ color }) => <TabBarIcon name="upload" color={color} />,

@@ -4,6 +4,7 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 import Colors from '../constants/Colors';
 import { MonoText } from './StyledText';
 import { Text, View } from './Themed';
+import { ScrollView } from 'react-native';
 import { TextInput, Button, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { useState, useEffect } from 'react';
@@ -52,16 +53,16 @@ export default function AddLayerArea({ path }: { path: string }) {
     console.log(layer, 'addLayer');
 
     // layerをstateに追加する
-    setLayers([...layers, layer]);
+    // setLayers([...layers, layer]);
 
     // layerを取得
-    getData('layersData').then(data => {
-      console.log(data, 'addLayer');
-      setLayers(data);
+    // getData('layersData').then(data => {
+    //   console.log(data, 'addLayer');
+    //   setLayers(data);
 
-      data.push(layer);
-      storeData('layersData', data);
-    });
+    //   data.push(layer);
+    //   storeData('layersData', data);
+    // });
 
     console.log('layersData');
     console.log(layersData);
@@ -70,11 +71,20 @@ export default function AddLayerArea({ path }: { path: string }) {
   // コンポーネントの更新によるuseEffectの停止, []
   useEffect(() => {
     // layerを取得
-    getData('layersData').then(data => {
-      console.log(data, 'useEffect');
-      setLayers(data);
-    });
+    // getData('layersData').then(data => {
+    //   console.log(data, 'useEffect');
+    //   setLayers(data);
+    // });
+
+
+    
+
+    // setLayers([...layers, []]);
   }, []);
+
+  const imagesLayer = async() => {
+    <Image key="layer_1_images_1" source={{uri: "https://vwp923728.kagoyacloud.com/wp-content/uploads/2022/05/0.png"}} style={{ width: 200, height: 200}} />
+  }
 
   const removeLayer = async () => {
     console.log('ffa');
@@ -119,7 +129,7 @@ export default function AddLayerArea({ path }: { path: string }) {
   };
 
   return (
-    <View>
+    <ScrollView>
       <View style={styles.getStartedContainer}>
         <Text
           onPress={addLayer}
@@ -130,8 +140,40 @@ export default function AddLayerArea({ path }: { path: string }) {
       </View>
 
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+
       
-    </View>
+      <View key="layer_1" style={styles.getStartedContainer} >
+        <Text
+            lightColor="rgba(0,0,0,0.8)"
+            darkColor="rgba(255,255,255,0.8)">
+            Max file size: 5mb, accepted: jpg|png|png
+        </Text>
+
+        <Button onPress={pickImage} title="choose images"></Button>
+
+        <Image key="layer_1_images_1" source={{uri: 'https://vwp923728.kagoyacloud.com/wp-content/uploads/2022/05/0.png'}} style={{ width: 150, height: 150}} />
+        <Image key="layer_1_images_2" source={{uri: 'https://vwp923728.kagoyacloud.com/wp-content/uploads/2022/05/1.png'}} style={{ width: 150, height: 150}} />
+        <Image key="layer_1_images_3" source={{uri: 'https://vwp923728.kagoyacloud.com/wp-content/uploads/2022/05/2.png'}} style={{ width: 150, height: 150}} />
+        <Image key="layer_1_images_4" source={{uri: 'https://vwp923728.kagoyacloud.com/wp-content/uploads/2022/05/3.png'}} style={{ width: 150, height: 150}} />
+
+      </View>
+      <View key="layer_2" style={styles.getStartedContainer} >
+        <Text
+            lightColor="rgba(0,0,0,0.8)"
+            darkColor="rgba(255,255,255,0.8)">
+            Max file size: 5mb, accepted: jpg|png|png
+        </Text>
+
+        <Button onPress={pickImage} title="choose images"></Button>
+
+        <Image key="layer_2_images_1" source={{uri: 'https://vwp923728.kagoyacloud.com/wp-content/uploads/2022/05/s.png'}} style={{ width: 150, height: 150}} />
+        <Image key="layer_2_images_2" source={{uri: 'https://vwp923728.kagoyacloud.com/wp-content/uploads/2022/05/l.png'}} style={{ width: 150, height: 150}} />
+        <Image key="layer_2_images_3" source={{uri: 'https://vwp923728.kagoyacloud.com/wp-content/uploads/2022/05/a.png'}} style={{ width: 150, height: 150}} />
+        <Image key="layer_2_images_4" source={{uri: 'https://vwp923728.kagoyacloud.com/wp-content/uploads/2022/05/n.png'}} style={{ width: 150, height: 150}} />
+
+      </View>
+      
+    </ScrollView>
   );
 }
 
